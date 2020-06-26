@@ -1,0 +1,22 @@
+pragma solidity ^0.6.0;
+
+contract SimplearrayEx{
+    
+    uint[] public IntArray=[1,2,3];
+    
+    string[] public StringArray=['A','B','C'];
+   
+    string[] public StringArray1=["A","B"];
+    
+    string[] public valuess;
+   
+    uint[] [] public array2D = [[4,5,6], [8,9,10]];
+    
+    function advalue(string memory _val) public{
+        valuess.push(_val);
+    }
+    
+     function valcnt() public view returns(uint){
+     return valuess.length;
+    }
+}

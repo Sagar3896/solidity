@@ -1,0 +1,22 @@
+/////////////Transfer Amt from  one Wallet to Another
+
+
+pragma solidity ^ 0.5.1;
+
+contract TransferToken{
+    mapping (address => uint256) public balances;
+    
+    address payable wallet;
+    
+    constructor(address payable _wallet) public{
+        wallet=_wallet;
+    } 
+    
+    function buyToken() public payable {		//functions that accepts ethers
+        balances[msg.sender]+=1;
+        wallet.transfer(msg.value);
+    }
+    
+}
+
+

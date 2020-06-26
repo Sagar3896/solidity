@@ -1,0 +1,69 @@
+////My First Completed Smart Contract to Book A Hotel Room and Check Out. 
+
+pragma solidity ^0.6.0;
+
+// Smart Contract to book a Hotel Room
+
+
+contract BookHotel{
+
+
+//DataTypes :-
+
+enum Statuses  { Vacant , Occupied }
+Statuses Currentstatus;
+
+event Occupy(address _occupant,uint _value);
+
+address payable public owner;
+
+
+
+constructor() public{
+    owner=msg.sender;
+    Currentstatus=Statuses.Vacant;
+}
+
+modifier OnWhileVacant{
+    
+    require(Currentstatus == Statuses.Vacant , "Currently Occupied !!!");
+    _;
+}
+
+modifier OnWhileBooked{
+    
+    require(Currentstatus == Statuses.Occupied , "Currently Vacant need to Occupy  !!!");
+    _;
+}
+    
+
+modifier Cost(uint _amt){
+    
+    require(msg.value >= _amt , "Not enough Ethers provided !!!");
+    _;
+}
+
+receive() external payable  OnWhileVacant Cost(2 ether){
+    
+    //Check Status :- commented below as we are using modifier Cost as an alternative
+    
+  //  require(msg.value >= 2 ether , "Not enough Ethers provided !!!");
+    
+    //Check Status :- commented below as we are using modifier OnWhileVacant as an alternative
+    
+    // require(Currentstatus == Statuses.Vacant , "Currently Occupied !!!");
+    
+    Currentstatus=Statuses.Occupied;
+    owner.transfer(msg.value);
+    
+    //Emitting the event
+    emit Occupy(msg.sender,msg.value);
+    
+}
+
+function CheckOut() public OnWhileBooked{
+    Currentstatus=Statuses.Vacant;
+}
+    
+    
+}

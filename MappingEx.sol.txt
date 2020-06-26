@@ -1,0 +1,33 @@
+pragma solidity ^0.6.0;
+
+contract MappingEx{
+    
+   mapping(uint => string) public names;
+   mapping(uint => Book) public books;
+   
+   //Syntax
+   //mapping(key => mapping(key => value2)) public Mainmap;
+   
+  //0x6cC0B36bD9EbB39Ca83c03739FC978162b0eDA7f
+  mapping(address => mapping(uint =>Book)) public Mainmap;
+  
+   
+   struct Book{
+       string title;
+       string author;
+   }
+  
+  constructor() public{
+      names[1]="Adam";
+      names[2]="Bruce";
+      names[3]="Carl";
+  }
+  
+  function addBook(uint _id,string memory _title,string memory _author) public{
+      books[_id]=Book(_title,_author);
+  }
+  
+   function MyBook(uint _id,string memory _title,string memory _author) public{
+      Mainmap[msg.sender][_id]=Book(_title,_author);
+  }
+}
