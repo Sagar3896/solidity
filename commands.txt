@@ -1,0 +1,7 @@
+git status ---> checking the changes
+git add
+git commit
+git push origin master
+git checkout -b temp
+git checkout temp
+

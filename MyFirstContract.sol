@@ -27,7 +27,7 @@ contract MyFirstCotract{
         Age=_value;
     }
     
-    ttttt
+    
         
 }
         
